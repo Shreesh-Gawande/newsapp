@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
+import logo from '../images/7011512_3520301.jpg';
+import "./NavBar.css"
 
 export class NavBar extends Component {
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="/">News Monkey</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">        
-      </ul>    
-    </div>
-  </div>
+
+          <div className="headingImage" >
+          <img src={logo} alt="news" className="top-heading"/>
+          </div>     
 </nav>
+<div className="news-options">
+            <button className="news-category">Sports</button>
+            <button className="news-category">Entairtainment</button>
+            <button className="news-category">Business</button>
+            <button className="news-category">Science</button>
+            <button className="news-category">Health</button>
+            <button className="news-category">Technology</button>
+            <button className="news-category">General</button>
+          </div>
       </div>
     )
   }
