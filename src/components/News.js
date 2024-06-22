@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import defaultImage from '../images/news-1425905_1280.jpg';
 import "./News.css"
 
 export class News extends Component {
@@ -53,7 +54,7 @@ export class News extends Component {
 
     return (
       <div className="container my-4">
-         <div className="top-headlines "><h2>Top</h2><h2> <span class="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2></div>
+         <div className="top-headlines "><h2>Top</h2><h2> <span className="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2></div>
         <div className="row">
           {currentPosts.map((element) => {
             return (
@@ -61,7 +62,7 @@ export class News extends Component {
                 <NewsItem
                   title={element.title ? element.title : ""}
                   description={element.description ? element.description : ""}
-                  imageUrl={element.urlToImage ? element.urlToImage : "https://ichef.bbci.co.uk/news/1024/branded_news/120E6/production/_132585937_netanyahu.jpg"}
+                  imageUrl={element.urlToImage ? element.urlToImage :defaultImage}
                   url={element.url}
                 />
               </div>
