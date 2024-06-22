@@ -20,7 +20,7 @@ export class News extends Component {
     const { category } = this.props;
     const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
     console.log(`Fetching news with API key: ${API_KEY}`);
-    let url = `http://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
     console.log(`Fetching news from URL: ${url}`);
     
     try {
