@@ -13,7 +13,7 @@ export class NavBar extends Component {
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="headingImage">
             <img src={logo} alt="news" className="top-heading"/>
-          </div>0
+          </div>
         </nav>
         <div className="news-options">
           <button className="news-category" onClick={() => this.CategoryChange('sports')}>Sports</button>

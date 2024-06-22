@@ -9,9 +9,16 @@
 .page-item{
     margin: 1%;
     border: none;
-    
+
 }
 .page-link{
     background-color: black;
     color: white;
+}
+.top-headlines{
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

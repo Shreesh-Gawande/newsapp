@@ -53,7 +53,7 @@ export class News extends Component {
 
     return (
       <div className="container my-4">
-        <h2>Top Headlines</h2>
+         <div className="top-headlines "><h2>Top</h2><h2> <span class="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2></div>
         <div className="row">
           {currentPosts.map((element) => {
             return (

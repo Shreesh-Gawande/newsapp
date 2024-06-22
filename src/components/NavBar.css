@@ -1,6 +1,8 @@
 .headingImage {
     width: 100vw; 
-    height: 15vh;  
+    height: 15vh; 
+    margin-top: 2%;
+    margin-bottom: 2%; 
 }
 
 .top-heading {
@@ -19,7 +21,13 @@
     width:14.19%;
     height: 100%;
     border:none;
+    font-size:100%;
 }
 .news-category:hover{
     color: rgb(100, 96, 96);
+}
+@media(max-width:400px){
+    .news-category{
+        font-size: 0.65rem;
+    }
 }
