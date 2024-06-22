@@ -26,9 +26,8 @@ export class News extends Component {
     try {
       this.setState({ loading: true, error: null });
       
-      // Set headers to specify HTTP/2.0
       let headers = new Headers();
-      headers.append('Upgrade', 'HTTP/2.0');
+      headers.append('Upgrade', 'HTTP/3.0');
       
       let response = await fetch(url, {
         headers: headers,
