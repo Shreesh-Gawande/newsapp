@@ -1,0 +1,17 @@
+.pagination{
+    width: 100vw;
+    height: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4%;
+}
+.page-item{
+    margin: 1%;
+    border: none;
+    
+}
+.page-link{
+    background-color: black;
+    color: white;
+}

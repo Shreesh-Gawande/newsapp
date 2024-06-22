@@ -1,14 +1,13 @@
 .headingImage {
     width: 100vw; 
     height: 15vh;  
-    margin-left: 2%;
 }
 
 .top-heading {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%; 
+    width: 100%; 
     height: 100%; 
 }
 .news-options{
@@ -17,7 +16,10 @@
     background-color: black;
 }
 .news-category{
-    width:14.13%;
+    width:14.19%;
     height: 100%;
     border:none;
+}
+.news-category:hover{
+    color: rgb(100, 96, 96);
 }

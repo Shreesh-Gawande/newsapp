@@ -1,18 +1,16 @@
-
-import './App.css';
-
-import React, { Component } from 'react'
+import React, { useState } from 'react';
 import NavBar from './components/NavBar';
 import News from './components/News';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar/>
-        <News/>
-      </div>
-    )
-  }
+const App = () => {
+  const [category, setCategory] = useState("general");
+
+  return (
+    <div>
+      <NavBar setCategory={setCategory} />
+      <News category={category} />
+    </div>
+  );
 }
 
+export default App;
