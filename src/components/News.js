@@ -19,7 +19,9 @@ export class News extends Component {
   async fetchNews() {
     const { category } = this.props;
     const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
+    console.log(`Fetching news with API key: ${API_KEY}`);  // Log the API key for debugging
     let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
+    console.log(`Fetching news from URL: ${url}`);  // Log the URL for debugging
     try {
       this.setState({ loading: true, error: null });
       let response = await fetch(url);
@@ -51,10 +53,9 @@ export class News extends Component {
   render() {
     const { articles, currentPage, postsPerPage, loading, error } = this.state;
 
-    // Ensure articles is an array before slicing
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = articles ? articles.slice(indexOfFirstPost, indexOfLastPost) : [];
+    const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(articles.length / postsPerPage); i++) {
@@ -63,9 +64,9 @@ export class News extends Component {
 
     return (
       <div className="container my-4">
-        <div className="top-headlines">
+        <div className="top-headlines ">
           <h2>Top</h2>
-          <h2><span className="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2>
+          <h2> <span className="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2>
         </div>
         {loading && <p>Loading...</p>}
         {error && <p style={{ color: 'red' }}>Error: {error}</p>}
