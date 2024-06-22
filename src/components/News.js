@@ -19,12 +19,15 @@ export class News extends Component {
   async fetchNews() {
     const { category } = this.props;
     const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
-    console.log(`Fetching news with API key: ${API_KEY}`);  // Log the API key for debugging
+    console.log(`Fetching news with API key: ${API_KEY}`);
     let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
-    console.log(`Fetching news from URL: ${url}`);  // Log the URL for debugging
+    console.log(`Fetching news from URL: ${url}`);
     try {
       this.setState({ loading: true, error: null });
-      let response = await fetch(url);
+      let response = await fetch(url, {
+        mode: 'cors', // Include this line to handle CORS
+        credentials: 'same-origin' // Include credentials if necessary
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
