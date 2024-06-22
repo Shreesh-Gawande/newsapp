@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import defaultImage from '../images/news-1425905_1280.jpg';
-import "./News.css"
+import "./News.css";
 
 export class News extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ export class News extends Component {
     this.state = {
       articles: [],
       loading: false,
+      error: null,
       currentPage: 1,
       postsPerPage: 12
     };
@@ -17,36 +18,44 @@ export class News extends Component {
 
   async fetchNews() {
     const { category } = this.props;
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=e4d8e520419f4d8e89e0eee41150ae4d`;
-    let data = await fetch(url);
-    let parsedData = await data.json();
-    this.setState({ articles: parsedData.articles });
+    const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
+    let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
+    try {
+      this.setState({ loading: true, error: null });
+      let response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      let parsedData = await response.json();
+      this.setState({ articles: parsedData.articles, loading: false });
+    } catch (error) {
+      console.error("Failed to fetch news articles:", error);
+      this.setState({ articles: [], loading: false, error: error.message });
+    }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.fetchNews();
   }
 
-  async componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     if (prevProps.category !== this.props.category) {
       this.fetchNews();
     }
   }
 
-  
   handlePageClick = (event, pageNumber) => {
     this.setState({ currentPage: pageNumber });
   };
 
   render() {
-    const { articles, currentPage, postsPerPage } = this.state;
+    const { articles, currentPage, postsPerPage, loading, error } = this.state;
 
-   
+    // Ensure articles is an array before slicing
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = articles.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = articles ? articles.slice(indexOfFirstPost, indexOfLastPost) : [];
 
-    
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(articles.length / postsPerPage); i++) {
       pageNumbers.push(i);
@@ -54,20 +63,23 @@ export class News extends Component {
 
     return (
       <div className="container my-4">
-         <div className="top-headlines "><h2>Top</h2><h2> <span className="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2></div>
+        <div className="top-headlines">
+          <h2>Top</h2>
+          <h2><span className="badge text-bg-secondary badge text-bg-danger">Headlines</span></h2>
+        </div>
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
         <div className="row">
-          {currentPosts.map((element) => {
-            return (
-              <div className="col-md-4" key={element.url}>
-                <NewsItem
-                  title={element.title ? element.title : ""}
-                  description={element.description ? element.description : ""}
-                  imageUrl={element.urlToImage ? element.urlToImage :defaultImage}
-                  url={element.url}
-                />
-              </div>
-            );
-          })}
+          {currentPosts.map((element) => (
+            <div className="col-md-4" key={element.url}>
+              <NewsItem
+                title={element.title ? element.title : ""}
+                description={element.description ? element.description : ""}
+                imageUrl={element.urlToImage ? element.urlToImage : defaultImage}
+                url={element.url}
+              />
+            </div>
+          ))}
         </div>
         <div className="pagination">
           <nav>
