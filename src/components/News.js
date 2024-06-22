@@ -22,15 +22,24 @@ export class News extends Component {
     console.log(`Fetching news with API key: ${API_KEY}`);
     let url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`;
     console.log(`Fetching news from URL: ${url}`);
+    
     try {
       this.setState({ loading: true, error: null });
+      
+      // Set headers to specify HTTP/2.0
+      let headers = new Headers();
+      headers.append('Upgrade', 'HTTP/2.0');
+      
       let response = await fetch(url, {
-        mode: 'cors', // Include this line to handle CORS
-        credentials: 'same-origin' // Include credentials if necessary
+        headers: headers,
+        mode: 'cors',
+        credentials: 'same-origin'
       });
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+  
       let parsedData = await response.json();
       this.setState({ articles: parsedData.articles, loading: false });
     } catch (error) {
@@ -38,6 +47,7 @@ export class News extends Component {
       this.setState({ articles: [], loading: false, error: error.message });
     }
   }
+  
 
   componentDidMount() {
     this.fetchNews();
